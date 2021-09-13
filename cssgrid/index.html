@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Grids</title>
+    <style>
+
+        .wrapper{
+            display:grid;
+            grid-template-columns: 70% 30%;
+            /*grid-column-gap:1em;
+            grid-row-gap:1em;*/
+
+            grid-gap:1em;
+        }
+        .wrapper > div{
+            background:#eee;
+            padding:1em;
+        }
+
+        .wrapper > div:nth-child(odd){
+            background:#ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, dolorem dolores tempora repudiandae ut repellendus maiores saepe cum? Vero quam molestias minima cumque deserunt unde quibusdam maiores nemo nobis nisi dicta ipsam debitis expedita suscipit eius et ab fugiat minus ipsa labore, temporibus voluptate quis vitae. Culpa perspiciatis earum, exercitationem quisquam quas ullam dolorum praesentium quam hic fugit vitae ratione quae nihil mollitia libero magni. Recusandae id ipsum illum accusantium quaerat laudantium, esse hic nobis amet deserunt soluta illo. Ut!
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae in fuga veniam, aut, temporibus, sint sunt cumque eum culpa modi ab assumenda tempora praesentium porro! Cumque consequatur eius asperiores doloremque.
+        </div>
+        <div>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, dolorem dolores tempora repudiandae ut repellendus maiores saepe cum? Vero quam molestias minima cumque deserunt unde quibusdam maiores nemo nobis nisi dicta ipsam debitis expedita suscipit eius et ab fugiat minus ipsa labore, temporibus voluptate quis vitae. Culpa perspiciatis earum, exercitationem quisquam quas ullam dolorum praesentium quam hic fugit vitae ratione quae nihil mollitia libero magni. Recusandae id ipsum illum accusantium quaerat laudantium, esse hic nobis amet deserunt soluta illo. Ut!
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae in fuga veniam, aut, temporibus, sint sunt cumque eum culpa modi ab assumenda tempora praesentium porro! Cumque consequatur eius asperiores doloremque.
+        </div>
+
+    </div>
+</body> 
+</html>
