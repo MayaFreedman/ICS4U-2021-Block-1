@@ -1,0 +1,556 @@
+body {
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+@font-face {
+    font-family: spaceFont;
+    src: url(/Potra.ttf);
+}
+
+
+/*Global*/
+
+.container {
+    width: 80%;
+    margin: auto;
+    /*moves to middle*/
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/*Header*/
+
+header {
+    background: #161527;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 80px;
+    border-bottom: #e5d8b6 3px solid;
+}
+
+header a {
+    padding-left: 2em;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+}
+
+header li {
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
+}
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    float: left;
+    font-family: spaceFont;
+    Font-size: 50px;
+    display: inline;
+}
+
+header .highlight,
+header .current a {
+    color: #fbed79;
+    font-weight: bold;
+}
+
+
+/*Star Beside Current Page*/
+
+header .current a {
+    background: url("../images/smallyellowstar.png");
+    background-repeat: no-repeat;
+    background-position-y: -0.2em;
+    background-position-x: 0.5em;
+    background-size: 25px;
+}
+
+header a:hover {
+    color: #ccc;
+    font-weight: bold;
+}
+
+
+/*The Team*/
+
+#space-background {
+    background-image: url('/images/spacebackground.jpg');
+    background-size: 300%;
+}
+
+#team li {
+    margin-bottom: 1em;
+    background: #fff;
+    color: #333;
+    width: 31%;
+}
+
+#team {
+    padding: 2em 1em;
+}
+
+.card-content {
+    padding: 1.5em;
+    background-color: #f4f4f4;
+}
+
+.card-content h3 {
+    font-size: 35px;
+}
+
+.card-content p {
+    font-size: 17px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+}
+
+#satellite {
+    width: 100%;
+    margin-top: 50%;
+    height: auto;
+}
+
+
+/*Welcome*/
+
+#welcome {
+    min-height: 400px;
+    background: url('/images/spacebackground.jpg');
+    background-size: 150%;
+    text-align: center;
+    color: #fff;
+}
+
+#welcome h1 {
+    margin-top: 100px;
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+#welcome p {
+    font-size: 20px;
+}
+
+
+/*Showcase*/
+
+#showcase {
+    background: #f4f4f4;
+    color: #000;
+    text-align: center;
+    align-content: center;
+}
+
+#showcase h2 {
+    font-size: 40px;
+    font-style: italic;
+    color: #161527;
+    margin: 40px;
+}
+
+#showcase p {
+    margin: 5%;
+    color: #fff;
+}
+
+#showcase img {
+    width: 90%;
+    margin-top: 5%;
+}
+
+.square {
+    background: url('/images/spacebackground.jpg');
+    background-size: 300%;
+}
+
+.display {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2em;
+}
+
+#button-styling {
+    background-color: #161527;
+    color: #fff;
+    border: #161527;
+    width: 31.3%;
+    margin: 50px;
+}
+
+
+/*Menu*/
+
+#background {
+    background: url('/images/spacebackground.jpg');
+}
+
+#lighten {
+    background: #fff;
+}
+
+#menu {
+    margin: 20px 0;
+}
+
+.divider>div {
+    border: #000 1px solid;
+    min-height: 300px;
+}
+
+.divider {
+    min-height: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    font-style: italic;
+}
+
+.divider h1 {
+    text-align: center;
+    margin: 10px;
+}
+
+.price {
+    margin: 0 25px 5px 5px;
+    text-align: right;
+}
+
+.food {
+    margin: 0 5px 0 30px;
+}
+
+.ingredients {
+    font-size: 15px;
+    color: #333;
+}
+
+.menu-heading {
+    border-bottom: 1px solid #000;
+    margin-bottom: 20px;
+}
+
+.menu-img {
+    width: 90%;
+    margin: 10px auto 20px;
+    display: block;
+}
+
+.setup {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    text-align: left;
+}
+
+.description-style1 {
+    text-align: center;
+    margin: 10px;
+}
+
+.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+/*Specialties*/
+
+#specialties-description {
+    margin: 15px 20px;
+}
+
+#specialties {
+    grid-row: 1/3;
+    background-color: #161527;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    color: #fff;
+}
+
+.specialty-ingredients {
+    font-size: 15px;
+    color: #D6D6D6;
+}
+
+
+/*Drinks*/
+
+#drinks {
+    grid-row: 1/4;
+    color: #161527;
+}
+
+#drink-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#smoothies {
+    width: 90%;
+    display: block;
+    margin: 20px 0 0 5%;
+}
+
+#juice {
+    width: 50%;
+    margin: 11.5px 0 20px 5%;
+}
+
+#latte {
+    width: 38%;
+    display: inline-block;
+    margin: 11.5px 0 20px 9.5px;
+}
+
+#fries,
+#burger {
+    width: 80%;
+    display: block;
+}
+
+#fries {
+    padding: 5% 0;
+}
+
+#burger {
+    padding-top: 5%
+}
+
+
+/*quick-bites*/
+
+#quick-bites {
+    grid-row: 3/6;
+    border-right: none;
+    color: #161527;
+}
+
+
+/*Sandwich*/
+
+#sandwiches {
+    border-top: none;
+    color: #161527;
+}
+
+#sandwich-img,
+#dessert-img {
+    width: 75%;
+    margin-bottom: 20px;
+}
+
+
+/*dessert*/
+
+#dessert {
+    border-top: none;
+    color: #161527;
+}
+
+
+/*Rewards*/
+
+#intro {
+    background: url("../images/astronaut.jpg");
+    background-size: cover;
+    height: 700px;
+    text-align: center;
+    color: #fff;
+}
+
+#intro h1 {
+    margin-top: 100px;
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+#intro p {
+    font-size: 20px;
+}
+
+#benefits h3 {
+    margin-top: 100px;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+#benefits li {
+    list-style-image: url("/images/smalleryellowstar.png");
+    background-repeat: no-repeat;
+}
+
+#benefits ul {
+    margin-bottom: 100px;
+}
+
+#benefits p {
+    margin: 30px 0 30px;
+}
+
+#benefits img {
+    width: 70%;
+}
+
+.benefits-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    vertical-align: center;
+}
+
+#sign-up {
+    min-height: 400px;
+    background-image: url("/images/spacebackground.jpg");
+    background-size: cover;
+    text-align: center;
+    color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*newsletter*/
+
+#sign-up h1 {
+    float: left;
+}
+
+#sign-up input[type="email"] {
+    padding: 4px;
+    height: 30px;
+    width: 250px;
+}
+
+#sign-up input {
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+#sign-up button {
+    border-radius: 4px;
+}
+
+
+/* Footer */
+
+footer {
+    padding: 2em;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    border-top: 3px solid #e5d8b6;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
+    grid-column-gap: 5.5em;
+}
+
+.footer-img {
+    display: inline;
+    width: 45px;
+}
+
+#facebook {
+    margin-left: 18px;
+    margin-right: 18px;
+}
+
+@media(max-width: 800px) {
+    .grid,
+    .wrapper,
+    .display {
+        display: block;
+    }
+    .card {
+        margin-bottom: 2em;
+    }
+    .team-image {
+        width: 0%;
+        height: auto;
+    }
+    #moon-planet,
+    #yellow-planet {
+        display: none;
+    }
+    .square p {
+        padding-bottom: 25px;
+    }
+}
+
+@media (max-width: 991px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #earth-planet,
+    #sun-planet,
+    #satellite {
+        display: none;
+    }
+    .wrapper {
+        grid-template-columns: 1fr 4fr 1fr;
+    }
+    .benefits-split,
+    .divider {
+        display: block;
+    }
+    #benefits h3 {
+        text-align: center;
+    }
+    #specialties {
+        width: 100%;
+        text-align: center;
+    }
+    #dessert,
+    #sandwiches {
+        border-top: 1px solid #000;
+    }
+    #quick-bites .food {
+        padding-left: 15px;
+    }
+    #quick-bites {
+        border-right: 1px solid #000;
+    }
+    #benefits ul {
+        text-align: center;
+        list-style: inside;
+    }
+    #benefits ul> :first-child {
+        list-style: none;
+        margin-top: 10%;
+    }
+    #benefits img {
+        margin-bottom: 15%;
+    }
+}
