@@ -1,0 +1,20 @@
+    @media (max-width: 991px) {
+        .space {
+            width: auto!important;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .side-by-side {
+            display: block!important;
+        }
+        .teams-scores {
+            border: none!important;
+        }
+    }
+    
+    @media (max-width: 300px) {
+        #games {
+            padding: 0;
+        }
+    }
