@@ -6,13 +6,19 @@ const gameData = '[{"GameID":16125,"Season":2021,"SeasonType":1,"Status":"Final"
 const teamString = localStorage.getItem('storedTeams');
 let allTeams = teamString != null ? JSON.parse(teamString) : JSON.parse(teamData);
 
+
 const allGamesString = localStorage.getItem('storedAllGames');
-let allGames = allGamesString != null ? JSON.parse(allGamesString) : JSON.parse(gameData);
+let allGames = allGamesString != null ? JSON.parse(allGamesString) : JSON.parse(gameData).filter(game => (game.Status !== "Canceled" && game.Status !== "Postponed"));;
 
-const gameString = localStorage.getItem('storedGames');
-let games = gameString != null ? JSON.parse(gameString) : JSON.parse(gameData);
+/*const gameString = localStorage.getItem('storedGames');
+let games = gameString != null ? JSON.parse(gameString) : JSON.parse(gameData);*/
 
-let teamsPerPage = 10;
+const currentTeamString = localStorage.getItem('storedCurrentTeam');
+let currentTeam = currentTeamString != null ? JSON.parse(currentTeamString) : 'all';
+
+
+
+let teamsPerPage = 40;
 
 sortGames();
 
@@ -20,7 +26,6 @@ function sortGames() {
     allGames.sort((a, b) => Date.parse(b.Day) - Date.parse(a.Day));
 }
 let pageNum = 1;
-let currentTeam;
 
 let filteredPage = allTeams.slice(pageNum * teamsPerPage - teamsPerPage, pageNum * teamsPerPage);
 
@@ -29,7 +34,6 @@ try {
     const gameString = localStorage.getItem('storedGames');
     allGames = JSON.parse(gameString);
 } catch (SyntaxError) {
-    console.log('caught');
     allGames = JSON.parse(gameData);
 }*/
 
@@ -57,10 +61,10 @@ function createStandings() {
 }
 
 function setCurrentTeam(teamName) {
-    let team = allTeams.forEach(team => {
-        if (team.Name === teamName) return team;
+    allTeams.forEach(team => {
+        if (team.Name === teamName) currentTeam = team.Key;
     });
-    currentTeam = team.Key;
+    storeData();
 }
 
 function createRow(team) {
@@ -70,8 +74,9 @@ function createRow(team) {
     let newCell = document.createElement('td');
     let link = document.createElement('a');
     link.appendChild(document.createTextNode(team.Name));
+    link.style = "color:black";
     link.setAttribute('onclick', ' setCurrentTeam(this.innerHTML);');
-    //link.setAttribute('href', '/games.html');
+    link.setAttribute('href', '/games.html');
 
     newCell.appendChild(link);
     newRow.appendChild(newCell);
@@ -142,24 +147,39 @@ displayGame(games[406]);*/
 //createGames();
 //createButtons();
 
-function sortByTeam(teamKey) {
-    games = [];
-    allGames.forEach(game => {
-        if (game.HomeTeam === teamKey || game.AwayTeam === teamKey) games.push(game);
-    });
-    createGames();
-    createButtons();
+function sortByTeam() {
+    try {
+        games = [];
+        if (currentTeam != 'all') {
+            allGames.forEach(game => {
+                if (game.HomeTeam === currentTeam || game.AwayTeam === currentTeam) games.push(game);
+            });
+        }
+
+        createGames();
+        createButtons();
+    } catch (TypeError) {};
 }
 
+function getKey(teamName) {
+    let key;
+    allTeams.forEach(team => { if (team.Name === teamName) key = team.Key });
+    return key;
+}
+
+
+sortByTeam();
 
 function pageDown() {
     pageNum = pageNum > 1 ? pageNum -= 1 : pageNum;
     createGames();
+    createButtons();
 }
 
 function pageUp() {
     pageNum = pageNum < 12 ? pageNum += 1 : pageNum;
     createGames();
+    createButtons();
 }
 
 function goToPage(element) {
@@ -196,18 +216,32 @@ createGames();
 */
 //Creates page buttons at bottom of screen
 function createButtons() {
+    let maxPage = Math.ceil(games.length / gamesPerPage);
     let input = document.querySelector('#pageNum');
-    for (let i = 0; i < games.length / gamesPerPage; i++) {
+    for (let i = 0; i < maxPage; i++) {
         let option = document.createElement('option');
         option.appendChild(document.createTextNode(i + 1));
         if (i === pageNum - 1) option.selected = 'selected';
         input.appendChild(option);
     }
-    ofTotal = document.querySelector('#ofTotal');
-    ofTotal.appendChild(document.createTextNode(` of ${Math.ceil(games.length/gamesPerPage)}`));
-}
 
-function changePage() {}
+    ofTotal = document.querySelector('#ofTotal');
+    let ofTotalText = document.createElement('p');
+    ofTotalText.appendChild(document.createTextNode(` of ${Math.ceil(games.length/gamesPerPage)}`));
+    ofTotalText.className = 'ofTotal d-inline';
+    oldOfTotal = document.querySelector('.ofTotal');
+    if (oldOfTotal !== null) ofTotal.replaceChild(ofTotalText, oldOfTotal);
+    else ofTotal.appendChild(ofTotalText);
+
+    let LeftArrow = document.querySelector('#leftArrow');
+    if (pageNum === 1) LeftArrow.disabled = true;
+    else LeftArrow.disabled = false;
+
+    let rightArrow = document.querySelector('#rightArrow');
+    if (pageNum === maxPage) rightArrow.disabled = true;
+    else rightArrow.disabled = false;
+
+}
 
 function displayGame(game) {
     try {
@@ -260,7 +294,8 @@ function displayGame(game) {
         if (game.Status === "F/OT") gameStatus += "/OT"
         else if (game.Status === "F/SO") gameStatus += "/SO"
         let status = document.createElement('p');
-        status.className = "mb-0 mx-5";
+        if (gameStatus !== "Final") status.className = "mb-0 ml-3 mr-5";
+        else status.className = "mb-0 mx-5";
 
         status.appendChild(document.createTextNode(gameStatus));
         status.style = "font-size:22px; ";
@@ -295,7 +330,7 @@ function displayGame(game) {
         if (prevDateText != date.innerHTML) container.appendChild(date);
         container.appendChild(sideBySide);
 
-    } catch (TypeError) { console.log('oh no'); };
+    } catch (TypeError) {};
 }
 
 function something(team, game) {
@@ -339,15 +374,23 @@ function newTeam() {
     let error = document.querySelector('.errorMsg');
     if (error != null) error.remove();
 
+    let same;
+    allTeams.forEach(team => { if (team.Name === newTeamName) same = true });
     //display error message if all fields are not filled out
     if (newTeamName == '' || newTeamWins == '' || newTeamLosses == '' || newTeamDivision == 'Choose Division ...') {
         let enterAllFields = createErrorMsg('Error: Please Fill Out All Required Fields');
         let container = document.querySelector('form .container');
         let enterNewTeam = document.querySelector('#test7');
         container.insertBefore(enterAllFields, enterNewTeam);
+        //display error message if team with that name already exists
+    } else if (same) {
+        let sameName = createErrorMsg('Error: Team With That Name Already Exists');
+        let container = document.querySelector('form .container');
+        let enterNewTeam = document.querySelector('#test7');
+        container.insertBefore(sameName, enterNewTeam);
     } else {
         //Creates new Team
-        newTeam = {
+        thisTeam = {
                 Name: newTeamName,
                 Wins: parseInt(newTeamWins),
                 Losses: parseInt(newTeamLosses),
@@ -360,14 +403,13 @@ function newTeam() {
         document.querySelector('#newTeamLosses').value = "";
         document.querySelector('#newTeamDivision').value = "Choose Division ...";
 
-        allTeams.push(newTeam);
+        allTeams.push(thisTeam);
         storeData();
     }
 }
 
 function newGame() {
     let hTeamName = document.querySelector('#homeTeamName').value;
-
     let aTeamName = document.querySelector('#awayTeamName').value;
     let hScore = document.querySelector('#homeScore').value;
     let aScore = document.querySelector('#awayScore').value;
@@ -396,6 +438,15 @@ function newGame() {
     teams.forEach(team => {
         if (team.Name === aTeamName) awayTeam = team;
     });
+
+    //Updates overall stats for the teams
+    if (hScore > aScore) {
+        homeTeam.Wins += 1;
+        awayTeam.Losses += 1;
+    } else {
+        awayTeam.Wins += 1;
+        homeTeam.Losses += 1;
+    }
 
     let today = new Date();
     // Displays an error message if: 
@@ -426,38 +477,18 @@ function newGame() {
         let i;
         allGames.push(game);
         sortGames();
-
-        /*for (i = allGames.length; i > 0; i--) {
-            //FLAWED LOGIC WITH INSERTING AT BEGINNING AND END <> WORRY ABOUT IT LATER!
-            /*if (Date.parse(allGames[i - 1].Day) <= Date.parse(date) && Date.parse(allGames[i].Day) >= Date.parse(date)) {
-                allGames.splice(i, 0, game);
-                i = -1;
-            }
-        }
-        if (i === 0) allGames.unshift(game);
-
-        console.log(allGames[test]);*/
-
-
-
         storeData();
-
+        //Emptys input
         document.querySelector('#homeTeamName').value = '';
         document.querySelector('#awayTeamName').value = '';
         document.querySelector('#homeScore').value = '';
         document.querySelector('#awayScore').value = '';
         document.querySelector('#date').value = '';
         document.querySelector('#OT').checked = false;
-
     }
-
-
-
-
-    //Creates new Game
-
 }
 
+//Creates a text element with the style of an error from given text
 function createErrorMsg(msg) {
     let enterAllFields = document.createElement('h4');
     enterAllFields.appendChild(document.createTextNode(msg));
@@ -473,5 +504,5 @@ function storeData() {
     console.log("storing");
     localStorage.setItem('storedAllGames', JSON.stringify(allGames));
     localStorage.setItem('storedGames', JSON.stringify(allTeams));
-
+    localStorage.setItem('storedCurrentTeam', JSON.stringify(currentTeam));
 }

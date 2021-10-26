@@ -43,8 +43,12 @@
 
     <div class="container">
         <div id="main" class="card card-body">
-            <form class="form-inline mb-3 align-self-lg-end">
-                <input id="filter" type="text" class="form-control mr-2" placeholder="Filter" onkeyup="filterTeams();">
+            <form class="form-inline mb-3">
+                <select id="newTeamDivision" class="form-control float-left">
+                    <option selected disabled>Choose Division ...</option><option>Metropolitan</option>
+                    <option>Atlantic</option><option>Central</option><option>Pacific</option>
+                  </select>
+                <input id="filter" type="text" class="form-control mr-2 justify-self-end" placeholder="Filter" onkeyup="filterTeams();">
             </form>
             <h2 class="title">American League East</h2>
             <table class="table table-striped">
