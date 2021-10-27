@@ -12,7 +12,6 @@ let allGames = gamesString != null ? JSON.parse(gamesString) : JSON.parse(gameDa
 //Gets the team of the current games being dislpayed from local storage, auto sets to all if none in storage
 const currentTeamString = localStorage.getItem('storedCurrentTeam');
 let currentTeam = currentTeamString != null ? JSON.parse(currentTeamString) : 'all';
-console.log(currentTeam);
 
 const teamsPerPage = 40;
 const gamesPerPage = 10;
@@ -50,8 +49,6 @@ function setCurrentTeam(teamName) {
         storeData();
     }
     pageNum = 1;
-    console.log(currentTeam);
-
 }
 
 //Creates a row in standings for a given team
@@ -103,7 +100,6 @@ function sort(field) {
             teams = allTeams.sort((a, b) => a.Name.localeCompare(b.Name) > 0 ? 1 : -1);
         } else if (field === 'wins') {
             teams = allTeams.sort((a, b) => a.Wins - b.Wins);
-            console.log(teams);
         } else if (field === 'losses') {
             teams = allTeams.sort((a, b) => a.Losses - b.Losses);
         } else if (field === 'division') {
@@ -130,10 +126,8 @@ function sort(field) {
 
 //Highlights the column that standings is being sorted by
 function highlightSort() {
-    console.log(currentSortField);
     let cols = document.querySelectorAll(`.${currentSortField}`);
     cols.forEach(element => element.style = "background:#ececec;");
-    console.log(cols);
 }
 
 //Fills a dropdown of all teams
@@ -151,10 +145,8 @@ function fillSelectButton() {
 
 //Filters the teams based on input in text box
 function filterTeams() {
-    console.log("we running?");
     let filterValue = document.querySelector('#filter').value;
     teams = allTeams.filter(team => (team.Name.toLowerCase().indexOf(filterValue) >= 0));
-    console.log(teams);
     createStandings();
     highlightSort();
 }
@@ -166,7 +158,6 @@ function filterByTeam() {
         if (currentTeam != 'all') {
             games = games.filter(game => (game.HomeTeam === currentTeam || game.AwayTeam === currentTeam));
         }
-        console.log(games);
         createGames();
     } catch (TypeError) {};
 }
@@ -511,7 +502,6 @@ function storeData() {
     localStorage.setItem('storedTeams', JSON.stringify(allTeams));
     localStorage.setItem('storedGames', JSON.stringify(allGames));
     localStorage.setItem('storedCurrentTeam', JSON.stringify(currentTeam));
-    console.log("storing");
 }
 
 sortGames();
