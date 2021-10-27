@@ -40,8 +40,6 @@ function createRow(team) {
 }
 
 function sort(field) {
-    console.log("im sorting");
-    console.log(teams);
     if (field === undefined) {
         field = currentSortField;
         //Called from filter teams
@@ -53,24 +51,23 @@ function sort(field) {
     }
     if (sortDirection === 'ASC') {
         if (field === 'team') {
-            team = teams.sort((a, b) => a.name.localeCompare(b.name) > 0 ? 1 : -1);
+            team = allTeams.sort((a, b) => a.name.localeCompare(b.name) > 0 ? 1 : -1);
         } else if (field === 'wins') {
-            teams = teams.sort((a, b) => a.wins - b.wins);
+            teams = allTeams.sort((a, b) => a.wins - b.wins);
         } else if (field === 'losses') {
-            teams = teams.sort((a, b) => a.losses - b.losses);
+            teams = allTeams.sort((a, b) => a.losses - b.losses);
         } else {
-            teams = teams.sort((a, b) => a.GB - b.GB);
+            teams = allTeams.sort((a, b) => a.GB - b.GB);
         }
     } else {
         if (field === 'team') {
-            team = teams.sort((a, b) => a.name.localeCompare(b.name) < 0 ? 1 : -1);
-            console.log("ooga booga");
+            team = allTeams.sort((a, b) => a.name.localeCompare(b.name) < 0 ? 1 : -1);
         } else if (field === 'wins') {
-            teams = teams.sort((a, b) => b.wins - a.wins);
+            teams = allTeams.sort((a, b) => b.wins - a.wins);
         } else if (field === 'losses') {
-            teams = teams.sort((a, b) => b.losses - a.losses);
+            teams = allTeams.sort((a, b) => b.losses - a.losses);
         } else {
-            teams = teams.sort((a, b) => b.GB - a.GB);
+            teams = allTeams.sort((a, b) => b.GB - a.GB);
         }
     }
     createStandings();
@@ -79,7 +76,6 @@ function sort(field) {
 function filterTeams() {
     let filterValue = document.querySelector('#filter').value;
     teams = allTeams.filter(team => (team.name.indexOf(filterValue) >= 0));
-    console.log(teams);
     sort(); // field in sort will be undefined
 }
 

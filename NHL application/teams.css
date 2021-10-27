@@ -2,6 +2,9 @@
         .space {
             width: auto!important;
         }
+        .img-fluid {
+            display: none!important;
+        }
     }
     
     @media (max-width: 768px) {
