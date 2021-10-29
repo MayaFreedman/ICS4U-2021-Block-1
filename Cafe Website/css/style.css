@@ -88,7 +88,10 @@ header .current a {
 
 header a:hover {
     color: #ccc;
-    font-weight: bold;
+}
+
+#space-cafe:hover {
+    color: inherit;
 }
 
 
@@ -442,6 +445,7 @@ header a:hover {
 }
 
 #sign-up input[type="email"] {
+    margin: 20px 0 15px 0;
     padding: 4px;
     height: 30px;
     width: 250px;
@@ -454,6 +458,7 @@ header a:hover {
 
 #sign-up button {
     border-radius: 4px;
+    margin-top: 7px;
 }
 
 
