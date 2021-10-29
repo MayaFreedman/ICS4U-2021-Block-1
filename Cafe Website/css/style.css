@@ -7,7 +7,7 @@ body {
 
 @font-face {
     font-family: spaceFont;
-    src: url(/Potra.ttf);
+    src: url(../Potra.ttf);
 }
 
 
@@ -95,7 +95,7 @@ header a:hover {
 /*The Team*/
 
 #space-background {
-    background-image: url('/images/spacebackground.jpg');
+    background-image: url('../images/spacebackground.jpg');
     background-size: 300%;
 }
 
@@ -140,7 +140,7 @@ header a:hover {
 
 #welcome {
     min-height: 400px;
-    background: url('/images/spacebackground.jpg');
+    background: url('../images/spacebackground.jpg');
     background-size: 150%;
     text-align: center;
     color: #fff;
@@ -184,7 +184,7 @@ header a:hover {
 }
 
 .square {
-    background: url('/images/spacebackground.jpg');
+    background: url('../images/spacebackground.jpg');
     background-size: 300%;
 }
 
@@ -206,7 +206,7 @@ header a:hover {
 /*Menu*/
 
 #background {
-    background: url('/images/spacebackground.jpg');
+    background: url('../images/spacebackground.jpg');
 }
 
 #lighten {
@@ -400,7 +400,7 @@ header a:hover {
 }
 
 #benefits li {
-    list-style-image: url("/images/smalleryellowstar.png");
+    list-style-image: url("../images/smalleryellowstar.png");
     background-repeat: no-repeat;
 }
 
@@ -425,7 +425,7 @@ header a:hover {
 
 #sign-up {
     min-height: 400px;
-    background-image: url("/images/spacebackground.jpg");
+    background-image: url("../images/spacebackground.jpg");
     background-size: cover;
     text-align: center;
     color: #f4f4f4;
