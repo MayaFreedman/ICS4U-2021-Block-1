@@ -211,12 +211,18 @@ function createGames() {
 function createButtons() {
     let maxPage = Math.ceil(games.length / gamesPerPage);
     let input = document.querySelector('#pageNum');
+    //Removes current page numbers from dropdown
+    let currentPageNums = document.querySelectorAll('.page-number');
+    currentPageNums.forEach(page => page.remove());
     //Fills the bottom dropdown with all page numbers
     for (let i = 0; i < maxPage; i++) {
         let option = document.createElement('option');
+        option.className = "page-number";
+        console.log(option);
         option.appendChild(document.createTextNode(i + 1));
         if (i === pageNum - 1) option.selected = 'selected';
         input.appendChild(option);
+        console.log(input);
     }
 
     //Creates text beside dropdown that states total number of pages
